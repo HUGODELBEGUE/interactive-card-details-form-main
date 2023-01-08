@@ -152,7 +152,7 @@ body {
   height: 900px;
   margin: auto;
   border-radius: 2px;
-  box-shadow: 0 0 10px 1px gray;
+  box-shadow: 0 0 5px 1px gray;
   overflow: hidden;
 }
 
@@ -243,6 +243,35 @@ body {
   align-items: center;
   justify-content: center;
 }
+.container__form .complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1.8em;
+}
+.container__form .complete__thank {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.container__form .complete__text {
+  color: hsl(279deg, 6%, 55%);
+}
+.container__form .complete__button {
+  width: 100%;
+  margin-top: 1em;
+}
+.container__form .complete__button button {
+  width: 100%;
+  background: hsl(278deg, 68%, 11%);
+  color: hsl(270deg, 3%, 87%);
+  border-color: hsl(278deg, 68%, 11%);
+  padding: 0.7em;
+  border-radius: 8px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
 .container__form .form {
   width: 20rem;
   position: absolute;
@@ -270,13 +299,16 @@ body {
   cursor: pointer;
 }
 .container__form form input:focus, .container__form form input:focus-visible {
-  outline: 2px auto linear-gradient(hsl(249deg, 99%, 64%) to hsl(278deg, 94%, 30%));
-}
-.container__form form input[type=text] {
-  margin-top: 0.4em;
+  outline: 2px auto hsl(278deg, 94%, 30%);
 }
 .container__form form input[type=text],
-.container__form form input[type=button] {
+.container__form form input[type=number] {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+.container__form form input[type=text],
+.container__form form input[type=submit],
+.container__form form input[type=number] {
   width: 100%;
 }
 .container__form form .input__name {
@@ -312,6 +344,20 @@ body {
   color: hsl(270deg, 3%, 87%);
   border-color: hsl(278deg, 68%, 11%);
   padding: 0.7em;
+}
+.container__form form .errors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 0.2em;
+  color: hsl(0deg, 100%, 66%);
+  font-size: 0.7em;
+}
+.container__form form .errorsInputs {
+  border: 2px solid hsl(0deg, 100%, 66%);
+}
+.container__form form .errorsInputs:focus, .container__form form .errorsInputs:focus-visible {
+  outline: 2px solid hsl(0deg, 100%, 66%);
 }
 
 /*# sourceMappingURL=style.css.map */

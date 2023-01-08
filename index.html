@@ -41,49 +41,140 @@
                 />
               </div>
               <div class="creditcard__infos">
-                <div class="creditcard__num">0000 0000 0000 0000</div>
+                <div v-if="number == ''" class="creditcard__num">
+                  {{ default__num }}
+                </div>
+                <div v-else class="creditcard__num">{{ numberClean }}</div>
                 <div class="creditcard__name__date">
-                  <div class="creditcard__name">Jane Appleseed</div>
-                  <div class="creditcard__date">00/00</div>
+                  <div v-if="name == ''" class="creditcard__name">
+                    {{ default__name }}
+                  </div>
+                  <div v-else class="creditcard__name">{{ nameClean }}</div>
+                  <div
+                    v-if="month == '' && year == ''"
+                    class="creditcard__date"
+                  >
+                    {{ default__month }}/{{ default__year }}
+                  </div>
+                  <div v-else class="creditcard__date">
+                    {{ monthClean }}/{{ yearClean }}
+                  </div>
                 </div>
               </div>
             </div>
             <div class="creditcard__back">
-              <div class="creditcard__secretnum">000</div>
+              <div v-if="cvc == ''" class="creditcard__secretnum">
+                {{ default__secretnum }}
+              </div>
+              <div v-else class="creditcard__secretnum">{{ cvcClean }}</div>
             </div>
           </div>
           <div class="container__form">
+            <!-- Part complete -->
+            <!-- <div class="complete">
+              <div class="complete__logo">
+                <img
+                  src="./assets/images/icon-complete.svg"
+                  alt="logo complete"
+                />
+              </div>
+              <div class="complete__thank">Thank you!</div>
+              <div class="complete__text">We've added your card details</div>
+              <div class="complete__button">
+                <button>Continue</button>
+              </div>
+            </div> -->
+            <!-- Part form -->
             <div class="form">
-              <form action="">
+              <form
+                @submit.prevent="validForm"
+                id="form"
+                action=""
+                method="post"
+              >
                 <div class="input__name">
                   <label for="name">Cardholder Name</label>
-                  <input type="text" placeholder="e.g. Jane Appleseed" />
+                  <input
+                    v-model="name"
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Jane Appleseed"
+                  />
                 </div>
                 <div class="input__number">
                   <label for="number">Card Number</label>
-                  <input type="text" placeholder="e.g. 1234 5678 9123 0000" />
+                  <input
+                    v-model="number"
+                    :class="showErrors"
+                    type="text"
+                    name="number"
+                    minlength="16"
+                    maxlength="16"
+                    placeholder="e.g. 1234 5678 9123 0000"
+                  />
+                  <div class="errors">
+                    <span v-if="isNaN(numberClean) && number != ''"
+                      >Wrong format, numbers only</span
+                    >
+                  </div>
                 </div>
                 <div class="input__expireDate">
                   <label for="expireDate">Exp. Date (MM/YY)</label>
                   <div class="select__expireDate">
-                    <input type="text" name="" id="" placeholder="MM" />
-                    <input type="text" name="" id="" placeholder="YY" />
+                    <input
+                      v-model="month"
+                      :class="[showErrors, borderRed]"
+                      type="text"
+                      name="month"
+                      id=""
+                      maxlength="2"
+                      placeholder="MM"
+                    />
+                    <input
+                      v-model="year"
+                      :class="[showErrors, borderRed]"
+                      type="text"
+                      name="year"
+                      id=""
+                      maxlength="2"
+                      placeholder="YY"
+                    />
+                  </div>
+                  <div class="errors">
+                    <span v-if="monthError || yearError">Can't be blank</span>
+                    <span
+                      v-if="monthClean > 12 || (isNaN(monthClean) && month != '') || (isNaN(yearClean) && year != '')"
+                      >Incorrect entry</span
+                    >
                   </div>
                 </div>
                 <div class="input__cvc">
                   <label for="cvc">CVC</label>
-                  <input type="text" placeholder="e.g. 123" />
+                  <input
+                    v-model="cvc"
+                    :class="[showErrors, borderRed]"
+                    type="text"
+                    name="cvc"
+                    minlength="3"
+                    maxlength="3"
+                    placeholder="e.g. 123"
+                  />
+                  <div class="errors">
+                    <span v-if="cvcError">Can't be blank</span>
+                    <span v-if="isNaN(cvcClean) && cvc != ''"
+                      >Incorrect entry</span
+                    >
+                  </div>
                 </div>
                 <div class="input__confirm">
-                  <input type="button" value="Confirm" />
+                  <input type="submit" value="Confirm" />
                 </div>
+                {{test}}
               </form>
             </div>
           </div>
         </div>
       </main>
-      <!-- Completed state start -->
-      <div>Thank you! We've added your card details Continue</div>
     </div>
 
     <div class="attribution">
