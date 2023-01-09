@@ -15,72 +15,115 @@ createApp({
             year: '',
             cvc: '',
             // Errors
-            borderRed: '',
-            monthError: false,
-            yearError: false,
-            cvcError: false,
+            noName: false,
+            noNumber: false,
+            noMonth: false,
+            noYear: false,
+            noCvc: false,
+            borderName: '',
+            borderNumber: '',
+            borderMonth: '',
+            borderYear: '',
+            borderCvc: '',
         }
     },
     computed: {
-        nameClean() {
+        nameChecked() {
             return this.name.trim();
         },
-        numberClean() {
-            let number = parseInt(this.number.trim());
-            return number;
+        numberChecked() {
+            return parseInt(this.number.trim());
         },
-        monthClean() {
+        monthChecked() {
             let month = parseInt(this.month.trim());
             return month;
         },
-        yearClean() {
+        yearChecked() {
             let year = parseInt(this.year.trim());
             return year;
         },
-        cvcClean() {
+        cvcChecked() {
             let cvc = parseInt(this.cvc.trim());
             return cvc;
         },
-        showErrors() {
+        className() {
             return {
-                errorsInputs: (isNaN(this.numberClean) && this.number != '') ||
-                    (isNaN(this.monthClean) && this.month != '') ||
-                    (isNaN(this.yearClean) && this.year != '') ||
-                    (isNaN(this.cvcClean) && this.cvc != ''),
+                errorsColor: (this.name.length < 2) && this.name != '',
+                normalColor: this.name.length >= 2
             }
         },
-        test() {
-            console.log(this.numberClean)
-        }
+        classNumber() {
+            return {
+                errorsColor: isNaN(this.numberChecked) && this.number != '',
+                normalColor: this.number.length > 0 && !isNaN(this.numberChecked)
+            }
+        },
+        classMonth() {
+            return {
+                errorsColor: isNaN(this.monthChecked) && this.month != '' || this.monthChecked > 12,
+                normalColor: this.month.length == 2 && !isNaN(this.monthChecked) && this.monthChecked <= 12
+            }
+        },
+        classYear() {
+            return {
+                errorsColor: isNaN(this.yearChecked) && this.year != '',
+                normalColor: this.year.length == 2 && !isNaN(this.yearChecked)
+            }
+        },
+        classCvc() {
+            return {
+                errorsColor: isNaN(this.cvcChecked) && this.cvc != '',
+                normalColor: this.cvc.length == 3 && !isNaN(this.cvcChecked)
+            }
+        },
     },
     methods: {
         validForm() {
-            if (this.nameClean && this.numberClean && this.monthClean && this.yearClean && this.cvcClean) {
-                console.log('formulaire valide')
-                return true;
+            if (this.nameChecked && this.numberChecked && this.monthChecked && this.yearChecked && this.cvcChecked) {
+                console.log('formulaire valide1')
+            } else {
+                if (this.nameChecked.length == 0) {
+                    console.log('this.nameChecked:', this.nameChecked)
+                    this.borderName = 'errorsColor';
+                    this.noName = true;
+                    return false;
+                }
+                this.noName = false;
+                this.borderName = '';
+                if (isNaN(this.numberChecked)) {
+                    console.log('this.numberChecked:', this.numberChecked)
+                    this.borderNumber = 'errorsColor';
+                    this.noNumber = true;
+                    return false;
+                }
+                this.noNumber = false;
+                this.borderNumber = '';
+                if (isNaN(this.monthChecked)) {
+                    console.log('this.monthChecked:', this.monthChecked)
+                    this.borderMonth = 'errorsColor';
+                    this.noMonth = true;
+                    return false;
+                }
+                this.noMonth = false;
+                this.borderMonth = '';
+                if (isNaN(this.yearChecked)) {
+                    console.log('this.yearChecked:', this.yearChecked)
+                    this.borderYear = 'errorsColor';
+                    this.noYear = true;
+                    return false;
+                }
+                this.noYear = false;
+                this.borderYear = '';
+                if (isNaN(this.cvcChecked)) {
+                    console.log('this.cvcChecked:', this.cvcChecked)
+                    this.borderCvc = 'errorsColor';
+                    this.noCvc = true;
+                    return false;
+                }
+                this.noCvc = false;
+                this.borderCvc = '';
             }
-            if (isNaN(this.monthClean)) {
-                this.borderRed = 'errorsInputs';
-                this.monthError = true;
-                return false;
-            }
-            this.monthError = false;
-            this.borderRed = '';
-            if (isNaN(this.yearClean)) {
-                this.borderRed = 'errorsInputs';
-                this.yearError = true;
-                return false;
-            }
-            this.yearError = false;
-            this.borderRed = '';
-            if (isNaN(this.cvcClean)) {
-                this.borderRed = 'errorsInputs';
-                this.cvcError = true;
-                return false;
-            }
-            this.cvcError = false;
-            this.borderRed = '';
-            console.log('formulaire valide')
+            console.log('formulaire valide2')
         }
     }
 }).mount('#app')
