@@ -4,16 +4,20 @@ createApp({
     data() {
         return {
             // Inputs
-            default__num: '0000 0000 0000 0000',
-            default__name: 'Jane Appleseed',
-            default__month: '00',
-            default__year: '00',
-            default__secretnum: '000',
-            name: '',
-            number: '',
-            month: '',
-            year: '',
-            cvc: '',
+            inputs__default: {
+                default__num: '0000 0000 0000 0000',
+                default__name: 'Jane Appleseed',
+                default__month: '00',
+                default__year: '00',
+                default__cvc: '000'
+            },
+            inputs: {
+                name: '',
+                number: '',
+                month: '',
+                year: '',
+                cvc: ''
+            },
             // Errors
             noName: false,
             noNumber: false,
@@ -24,56 +28,70 @@ createApp({
             borderNumber: '',
             borderMonth: '',
             borderYear: '',
-            borderCvc: '',
+            borderCvc: ''
         }
     },
     computed: {
+        numberSpaces() {
+            let number = this.inputs.number;
+            if (number.length == 4) {
+                console.log('nombre * 4');
+                number += 'hello';
+            }
+            if (number.length == 9) {
+                number += ' ';
+            }
+            if (number.length == 14) {
+                number += ' ';
+            }
+            console.log(number);
+            return number;
+        },
+        // Checking input values
         nameChecked() {
-            return this.name.trim();
+            return this.inputs.name.trim();
         },
         numberChecked() {
-            return parseInt(this.number.trim());
+            return parseInt(this.inputs.number.trim());
         },
         monthChecked() {
-            let month = parseInt(this.month.trim());
-            return month;
+            return parseInt(this.inputs.month.trim());
         },
         yearChecked() {
-            let year = parseInt(this.year.trim());
-            return year;
+            return parseInt(this.inputs.year.trim());
         },
         cvcChecked() {
-            let cvc = parseInt(this.cvc.trim());
-            return cvc;
+            return parseInt(this.inputs.cvc.trim());
         },
+        // Adding class to inputs
         className() {
             return {
-                errorsColor: (this.name.length < 2) && this.name != '',
-                normalColor: this.name.length >= 2
+                errorsColor: (this.inputs.name.length < 2) && this.inputs.name != '',
+                normalColor: this.inputs.name.length >= 2
             }
         },
         classNumber() {
             return {
-                errorsColor: isNaN(this.numberChecked) && this.number != '',
-                normalColor: this.number.length > 0 && !isNaN(this.numberChecked)
+                errorsColor: isNaN(this.numberChecked) && this.inputs.number != '',
+                normalColor: this.inputs.number.length > 0 && !isNaN(this.numberChecked)
             }
         },
         classMonth() {
             return {
-                errorsColor: isNaN(this.monthChecked) && this.month != '' || this.monthChecked > 12,
-                normalColor: this.month.length == 2 && !isNaN(this.monthChecked) && this.monthChecked <= 12
+                errorsColor: isNaN(this.monthChecked) && this.inputs.month != '' || this.monthChecked > 12,
+                normalColor: this.inputs.month.length == 2 && !isNaN(this.monthChecked) && this.monthChecked <= 12
             }
         },
         classYear() {
             return {
-                errorsColor: isNaN(this.yearChecked) && this.year != '',
-                normalColor: this.year.length == 2 && !isNaN(this.yearChecked)
+                errorsColor: isNaN(this.yearChecked) && this.inputs.year != '',
+                normalColor: this.inputs.year.length == 2 && !isNaN(this.yearChecked)
             }
         },
         classCvc() {
             return {
-                errorsColor: isNaN(this.cvcChecked) && this.cvc != '',
-                normalColor: this.cvc.length == 3 && !isNaN(this.cvcChecked)
+                errorsColor: isNaN(this.cvcChecked) && this.inputs.cvc != '',
+                normalColor: this.inputs.cvc.length == 3 && !isNaN(this.cvcChecked)
             }
         },
     },
@@ -83,7 +101,7 @@ createApp({
                 console.log('formulaire valide1')
             } else {
                 if (this.nameChecked.length == 0) {
-                    console.log('this.nameChecked:', this.nameChecked)
+                    console.log('name:', this.nameChecked)
                     this.borderName = 'errorsColor';
                     this.noName = true;
                     return false;
@@ -91,7 +109,7 @@ createApp({
                 this.noName = false;
                 this.borderName = '';
                 if (isNaN(this.numberChecked)) {
-                    console.log('this.numberChecked:', this.numberChecked)
+                    console.log('number:', this.numberChecked)
                     this.borderNumber = 'errorsColor';
                     this.noNumber = true;
                     return false;
@@ -99,7 +117,7 @@ createApp({
                 this.noNumber = false;
                 this.borderNumber = '';
                 if (isNaN(this.monthChecked)) {
-                    console.log('this.monthChecked:', this.monthChecked)
+                    console.log('month:', this.monthChecked)
                     this.borderMonth = 'errorsColor';
                     this.noMonth = true;
                     return false;
@@ -107,7 +125,7 @@ createApp({
                 this.noMonth = false;
                 this.borderMonth = '';
                 if (isNaN(this.yearChecked)) {
-                    console.log('this.yearChecked:', this.yearChecked)
+                    console.log('year:', this.yearChecked)
                     this.borderYear = 'errorsColor';
                     this.noYear = true;
                     return false;
@@ -115,7 +133,7 @@ createApp({
                 this.noYear = false;
                 this.borderYear = '';
                 if (isNaN(this.cvcChecked)) {
-                    console.log('this.cvcChecked:', this.cvcChecked)
+                    console.log('cvc:', this.cvcChecked)
                     this.borderCvc = 'errorsColor';
                     this.noCvc = true;
                     return false;

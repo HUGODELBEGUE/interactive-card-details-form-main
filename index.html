@@ -41,32 +41,33 @@
                 />
               </div>
               <div class="creditcard__infos">
-                <div v-if="number == ''" class="creditcard__num">
-                  {{ default__num }}
+                <div v-if="inputs.number == ''" class="creditcard__num">
+                  {{ inputs__default.default__num }}
                 </div>
-                <div v-else class="creditcard__num">{{ number }}</div>
+                <div v-else class="creditcard__num">{{ numberSpaces }}</div>
                 <div class="creditcard__name__date">
-                  <div v-if="name == ''" class="creditcard__name">
-                    {{ default__name }}
+                  <div v-if="inputs.name == ''" class="creditcard__name">
+                    {{ inputs__default.default__name }}
                   </div>
-                  <div v-else class="creditcard__name">{{ name }}</div>
+                  <div v-else class="creditcard__name">{{ inputs.name }}</div>
                   <div
-                    v-if="month == '' && year == ''"
+                    v-if="inputs.month == '' && inputs.year == ''"
                     class="creditcard__date"
                   >
-                    {{ default__month }}/{{ default__year }}
+                    {{ inputs__default.default__month }}/{{
+                    inputs__default.default__year }}
                   </div>
                   <div v-else class="creditcard__date">
-                    {{ month }}/{{ year }}
+                    {{ inputs.month }}/{{ inputs.year }}
                   </div>
                 </div>
               </div>
             </div>
             <div class="creditcard__back">
-              <div v-if="cvc == ''" class="creditcard__secretnum">
-                {{ default__secretnum }}
+              <div v-if="inputs.cvc == ''" class="creditcard__secretnum">
+                {{ inputs__default.default__cvc }}
               </div>
-              <div v-else class="creditcard__secretnum">{{ cvc }}</div>
+              <div v-else class="creditcard__secretnum">{{ inputs.cvc }}</div>
             </div>
           </div>
           <div class="container__form">
@@ -95,15 +96,17 @@
                 <div class="input__name">
                   <label for="name">Cardholder Name</label>
                   <input
-                    v-model="name"
+                    v-model="inputs.name"
                     :class="[className, borderName]"
                     type="text"
                     name="name"
                     placeholder="e.g. Jane Appleseed"
                   />
                   <div class="errors">
-                    <span v-if="noName && name == ''">Can't be blank</span>
-                    <span v-if="nameChecked.length < 2 && name != ''"
+                    <span v-if="noName && inputs.name == ''"
+                      >Can't be blank</span
+                    >
+                    <span v-if="nameChecked.length < 2 && inputs.name != ''"
                       >Minimum 2 letters</span
                     >
                   </div>
@@ -111,17 +114,19 @@
                 <div class="input__number">
                   <label for="number">Card Number</label>
                   <input
-                    v-model="number"
+                    v-model="inputs.number"
                     :class="[classNumber, borderNumber]"
                     type="text"
                     name="number"
-                    minlength="16"
-                    maxlength="16"
+                    minlength="19"
+                    maxlength="19"
                     placeholder="e.g. 1234 5678 9123 0000"
                   />
                   <div class="errors">
-                    <span v-if="noNumber && number == ''">Can't be blank</span>
-                    <span v-if="isNaN(numberChecked) && number != ''"
+                    <span v-if="noNumber && inputs.number == ''"
+                      >Can't be blank</span
+                    >
+                    <span v-if="isNaN(numberChecked) && inputs.number != ''"
                       >Wrong format, numbers only</span
                     >
                   </div>
@@ -130,7 +135,7 @@
                   <label for="expireDate">Exp. Date (MM/YY)</label>
                   <div class="select__expireDate">
                     <input
-                      v-model="month"
+                      v-model="inputs.month"
                       :class="[classMonth, borderMonth]"
                       type="text"
                       name="month"
@@ -139,7 +144,7 @@
                       placeholder="MM"
                     />
                     <input
-                      v-model="year"
+                      v-model="inputs.year"
                       :class="[classYear, borderYear]"
                       type="text"
                       name="year"
@@ -150,11 +155,11 @@
                   </div>
                   <div class="errors">
                     <span
-                      v-if="(noMonth && month == '') || (noYear && year == '')"
+                      v-if="(noMonth && inputs.month == '') || (noYear && inputs.year == '')"
                       >Can't be blank</span
                     >
                     <span
-                      v-if="monthChecked > 12 || (isNaN(monthChecked) && month != '') || (isNaN(yearChecked) && year != '')"
+                      v-if="monthChecked > 12 || (isNaN(monthChecked) && inputs.month != '') || (isNaN(yearChecked) && inputs.year != '')"
                       >Incorrect entry</span
                     >
                   </div>
@@ -162,7 +167,7 @@
                 <div class="input__cvc">
                   <label for="cvc">CVC</label>
                   <input
-                    v-model="cvc"
+                    v-model="inputs.cvc"
                     :class="[classCvc, borderCvc]"
                     type="text"
                     name="cvc"
@@ -171,8 +176,8 @@
                     placeholder="e.g. 123"
                   />
                   <div class="errors">
-                    <span v-if="noCvc && cvc == ''">Can't be blank</span>
-                    <span v-if="isNaN(cvcChecked) && cvc != ''"
+                    <span v-if="noCvc && inputs.cvc == ''">Can't be blank</span>
+                    <span v-if="isNaN(cvcChecked) && inputs.cvc != ''"
                       >Incorrect entry</span
                     >
                   </div>
