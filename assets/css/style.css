@@ -144,23 +144,39 @@ table {
 
 body {
   min-height: 100vh;
+  max-width: 1440px;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+@media only screen and (max-width: 1440px) {
+  body {
+    justify-content: flex-start;
+  }
 }
 
 #app {
-  width: 1440px;
+  max-width: 1440px;
   height: 900px;
-  margin: auto;
-  border-radius: 2px;
-  box-shadow: 0 0 5px 1px gray;
-  overflow: hidden;
+  filter: drop-shadow(0 0 3px hsl(270deg, 3%, 87%));
+}
+@media only screen and (max-width: 375px) {
+  #app {
+    min-width: 375px;
+  }
 }
 
 .container__main {
   min-height: 900px;
   display: flex;
   justify-content: center;
+}
+@media only screen and (max-width: 1440px) {
+  .container__main {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .container__creditcard {
@@ -170,29 +186,93 @@ body {
   background-image: url(../images/bg-main-desktop.png);
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 1.9em;
   color: hsl(0deg, 0%, 100%);
+}
+@media only screen and (max-width: 1440px) {
+  .container__creditcard {
+    display: grid;
+    width: 100%;
+    height: 25vh;
+    background-image: url(../images/bg-main-mobile.png);
+    padding: 2.8em 20.5%;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .container__creditcard {
+    height: 20vh;
+    font-size: 14px;
+    padding: 2.8em 12%;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .container__creditcard {
+    height: 15.5vh;
+    font-size: 11px;
+    padding: 2.8em 5%;
+  }
+}
+.container__creditcard .creditcard__size {
+  width: 447px;
+  height: auto;
+  aspect-ratio: 1.8244897959/1;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 920px) {
+  .container__creditcard .creditcard__size {
+    width: calc(447px * 0.8);
+  }
+}
+@media only screen and (max-width: 620px) {
+  .container__creditcard .creditcard__size {
+    width: calc(447px * 0.6);
+  }
 }
 
 .creditcard__front {
-  z-index: 1;
-  width: 447px;
-  height: 245px;
-  overflow: hidden;
   background-image: url(../images/bg-card-front.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding: 1.5em;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   position: absolute;
-  top: 10.5rem;
-  left: 10rem;
-  padding: 1.5em;
+  top: 21%;
+  left: 34%;
+  z-index: 2;
+}
+@media only screen and (max-width: 1440px) {
+  .creditcard__front {
+    top: 49%;
+    left: initial;
+    justify-self: flex-start;
+    margin-left: 20.5%;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .creditcard__front {
+    top: 49%;
+    margin-left: 12%;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .creditcard__front {
+    top: 50%;
+    margin-left: 5%;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .creditcard__front {
+    width: 100%;
+    height: 183px;
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .creditcard__front .creditcard__logo img {
+    width: 25%;
+  }
 }
 .creditcard__front .creditcard__infos {
   display: flex;
@@ -210,29 +290,65 @@ body {
   font-size: 0.7em;
   letter-spacing: 0.1em;
 }
+@media only screen and (max-width: 920px) {
+  .creditcard__front .creditcard__name__date {
+    font-size: 0.9em;
+  }
+}
 .creditcard__front .creditcard__name {
   text-transform: uppercase;
 }
 
 .creditcard__back {
-  z-index: 1;
-  width: 447px;
-  height: 245px;
-  overflow: hidden;
+  filter: drop-shadow(30px 0px 260px gray);
   background-image: url(../images/bg-card-back.png);
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   position: absolute;
-  bottom: 10.5rem;
-  left: 15rem;
+  bottom: 21%;
+  left: 52%;
+  z-index: 1;
+}
+@media only screen and (max-width: 1440px) {
+  .creditcard__back {
+    left: initial;
+    justify-self: flex-end;
+    margin-right: 20.5%;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .creditcard__back {
+    margin-right: 12%;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .creditcard__back {
+    margin-right: 5%;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .creditcard__back {
+    width: 100%;
+    height: 183px;
+    background-size: contain;
+  }
 }
 .creditcard__back .creditcard__secretnum {
   margin-right: 3rem;
   font-size: 0.7em;
   letter-spacing: 0.1em;
+}
+@media only screen and (max-width: 920px) {
+  .creditcard__back .creditcard__secretnum {
+    font-size: 0.9em;
+    margin-right: 2.5rem;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .creditcard__back .creditcard__secretnum {
+    margin-right: 2rem;
+  }
 }
 
 .container__form {
@@ -244,44 +360,55 @@ body {
   align-items: center;
   justify-content: center;
 }
-.container__form .complete {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 1.8em;
+@media only screen and (max-width: 1440px) {
+  .container__form {
+    width: 100%;
+    padding: 7em 1.5em 3em;
+    font-size: 19px;
+  }
 }
-.container__form .complete__thank {
-  font-size: 1.5em;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+@media only screen and (max-width: 920px) {
+  .container__form {
+    font-size: 20px;
+    padding: 5.8em 1.5em 2.5em;
+  }
 }
-.container__form .complete__text {
-  color: hsl(279deg, 6%, 55%);
+@media only screen and (max-width: 620px) {
+  .container__form {
+    font-size: 21px;
+    padding: 4.5em 1.5em 2.5em;
+  }
 }
-.container__form .complete__button {
-  width: 100%;
-  margin-top: 1em;
-}
-.container__form .complete__button button {
-  width: 100%;
-  background: hsl(278deg, 68%, 11%);
-  color: hsl(270deg, 3%, 87%);
-  border-color: hsl(278deg, 68%, 11%);
-  padding: 0.7em;
-  border-radius: 8px;
-  font-size: 0.9em;
-  cursor: pointer;
+@media only screen and (max-width: 375px) {
+  .container__form {
+    font-size: 22px;
+  }
 }
 .container__form .form {
-  width: 20rem;
+  width: 40%;
   position: absolute;
-  left: 19rem;
+  left: 35%;
 }
-.container__form form {
+@media only screen and (max-width: 1440px) {
+  .container__form .form {
+    width: 60%;
+    position: static;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .container__form .form {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .container__form .form {
+    width: 100%;
+  }
+}
+.container__form .wrapper {
+  width: 100%;
   display: grid;
-  grid-template-columns: 50%;
-  grid-column-gap: 1em;
+  grid-template-columns: repeat(2, 50%);
 }
 .container__form form label {
   font-size: 0.7em;
@@ -289,6 +416,11 @@ body {
   color: hsl(278deg, 68%, 11%);
   font-weight: bold;
   letter-spacing: 0.1em;
+}
+@media only screen and (max-width: 375px) {
+  .container__form form label {
+    font-size: 0.6em;
+  }
 }
 .container__form form input {
   padding: 0.6em;
@@ -303,6 +435,30 @@ body {
   border-style: solid;
   border-image: linear-gradient(hsl(249deg, 99%, 64%), hsl(278deg, 94%, 30%)) 1;
 }
+.container__form form .complete {
+  text-align: center;
+  grid-row-gap: 1.3em;
+}
+.container__form form .complete__logo {
+  grid-column: 1/3;
+  grid-row: 1;
+  margin-bottom: 0.5em;
+}
+.container__form form .complete__thank {
+  grid-column: 1/3;
+  grid-row: 2;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.container__form form .complete__text {
+  grid-column: 1/3;
+  grid-row: 3;
+  color: hsl(279deg, 6%, 55%);
+}
+.container__form form .complete__continue {
+  margin-top: 1.3em !important;
+}
 .container__form form input[type=text],
 .container__form form input[type=number] {
   margin-top: 0.4em;
@@ -310,7 +466,7 @@ body {
 }
 .container__form form input[type=text],
 .container__form form input[type=submit],
-.container__form form input[type=number] {
+.container__form form input[type=button] {
   width: 100%;
 }
 .container__form form .input__name {
@@ -331,21 +487,39 @@ body {
 .container__form form .input__expireDate .select__expireDate {
   display: flex;
   column-gap: 0.5em;
+  margin-right: 0.5em;
 }
 .container__form form .input__cvc {
   grid-column: 2/3;
   grid-row: 3;
+  margin-left: 0.5em;
 }
 .container__form form .input__confirm {
   grid-column: 1/3;
   grid-row: 4;
   margin-top: 0.8em;
+  text-align: center;
 }
 .container__form form .input__confirm input {
   background: hsl(278deg, 68%, 11%);
   color: hsl(270deg, 3%, 87%);
   border-color: hsl(278deg, 68%, 11%);
   padding: 0.7em;
+}
+@media only screen and (max-width: 1440px) {
+  .container__form form .input__confirm input {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 920px) {
+  .container__form form .input__confirm input {
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 620px) {
+  .container__form form .input__confirm input {
+    width: 100%;
+  }
 }
 .container__form form .errors {
   display: flex;

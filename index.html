@@ -12,11 +12,11 @@
       href="./assets/images/favicon-32x32.png"
     />
     <title>Interactive card details form</title>
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
       .attribution {
         font-size: 11px;
         text-align: center;
+        margin-top: 2rem;
       }
       .attribution a {
         color: hsl(228, 45%, 44%);
@@ -33,7 +33,7 @@
       <main>
         <div class="container__main">
           <div class="container__creditcard">
-            <div class="creditcard__front">
+            <div class="creditcard__front creditcard__size">
               <div class="creditcard__logo">
                 <img
                   src="./assets/images/card-logo.svg"
@@ -63,7 +63,7 @@
                 </div>
               </div>
             </div>
-            <div class="creditcard__back">
+            <div class="creditcard__back creditcard__size">
               <div v-if="inputs.cvc == ''" class="creditcard__secretnum">
                 {{ inputs__default.default__cvc }}
               </div>
@@ -71,20 +71,6 @@
             </div>
           </div>
           <div class="container__form">
-            <!-- Part complete -->
-            <!-- <div class="complete">
-              <div class="complete__logo">
-                <img
-                  src="./assets/images/icon-complete.svg"
-                  alt="logo complete"
-                />
-              </div>
-              <div class="complete__thank">Thank you!</div>
-              <div class="complete__text">We've added your card details</div>
-              <div class="complete__button">
-                <button>Continue</button>
-              </div>
-            </div> -->
             <!-- Part form -->
             <div class="form">
               <form
@@ -93,97 +79,118 @@
                 action=""
                 method="post"
               >
-                <div class="input__name">
-                  <label for="name">Cardholder Name</label>
-                  <input
-                    v-model="inputs.name"
-                    :class="[className, borderName]"
-                    type="text"
-                    name="name"
-                    placeholder="e.g. Jane Appleseed"
-                  />
-                  <div class="errors">
-                    <span v-if="noName && inputs.name == ''"
-                      >Can't be blank</span
-                    >
-                    <span v-if="nameChecked.length < 2 && inputs.name != ''"
-                      >Minimum 2 letters</span
-                    >
-                  </div>
-                </div>
-                <div class="input__number">
-                  <label for="number">Card Number</label>
-                  <input
-                    v-model="inputs.number"
-                    :class="[classNumber, borderNumber]"
-                    type="text"
-                    name="number"
-                    minlength="19"
-                    maxlength="19"
-                    placeholder="e.g. 1234 5678 9123 0000"
-                  />
-                  <div class="errors">
-                    <span v-if="noNumber && inputs.number == ''"
-                      >Can't be blank</span
-                    >
-                    <span v-if="isNaN(numberChecked) && inputs.number != ''"
-                      >Wrong format, numbers only</span
-                    >
-                  </div>
-                </div>
-                <div class="input__expireDate">
-                  <label for="expireDate">Exp. Date (MM/YY)</label>
-                  <div class="select__expireDate">
-                    <input
-                      v-model="inputs.month"
-                      :class="[classMonth, borderMonth]"
-                      type="text"
-                      name="month"
-                      id=""
-                      maxlength="2"
-                      placeholder="MM"
-                    />
-                    <input
-                      v-model="inputs.year"
-                      :class="[classYear, borderYear]"
-                      type="text"
-                      name="year"
-                      id=""
-                      maxlength="2"
-                      placeholder="YY"
+                <!-- Part complete -->
+                <div v-if="valid" class="complete wrapper">
+                  <div class="complete__logo">
+                    <img
+                      src="./assets/images/icon-complete.svg"
+                      alt="logo complete"
                     />
                   </div>
-                  <div class="errors">
-                    <span
-                      v-if="(noMonth && inputs.month == '') || (noYear && inputs.year == '')"
-                      >Can't be blank</span
-                    >
-                    <span
-                      v-if="monthChecked > 12 || (isNaN(monthChecked) && inputs.month != '') || (isNaN(yearChecked) && inputs.year != '')"
-                      >Incorrect entry</span
-                    >
+                  <div class="complete__thank">Thank you!</div>
+                  <div class="complete__text">
+                    We've added your card details
+                  </div>
+                  <div class="input__confirm complete__continue">
+                    <input @click="reload" type="button" value="Continue" />
                   </div>
                 </div>
-                <div class="input__cvc">
-                  <label for="cvc">CVC</label>
-                  <input
-                    v-model="inputs.cvc"
-                    :class="[classCvc, borderCvc]"
-                    type="text"
-                    name="cvc"
-                    minlength="3"
-                    maxlength="3"
-                    placeholder="e.g. 123"
-                  />
-                  <div class="errors">
-                    <span v-if="noCvc && inputs.cvc == ''">Can't be blank</span>
-                    <span v-if="isNaN(cvcChecked) && inputs.cvc != ''"
-                      >Incorrect entry</span
-                    >
+                <!-- Part inputs -->
+                <div v-else class="wrapper">
+                  <div class="input__name">
+                    <label for="name">Cardholder Name</label>
+                    <input
+                      v-model="inputs.name"
+                      :class="[className, borderName]"
+                      type="text"
+                      name="name"
+                      placeholder="e.g. Jane Appleseed"
+                    />
+                    <div class="errors">
+                      <span v-if="noName && inputs.name == ''"
+                        >Can't be blank</span
+                      >
+                      <span v-if="nameChecked.length < 2 && inputs.name != ''"
+                        >Minimum 2 letters</span
+                      >
+                    </div>
                   </div>
-                </div>
-                <div class="input__confirm">
-                  <input type="submit" value="Confirm" />
+                  <div class="input__number">
+                    <label for="number">Card Number</label>
+                    <input
+                      v-model="inputs.number"
+                      :class="[classNumber, borderNumber]"
+                      type="text"
+                      name="number"
+                      minlength="19"
+                      maxlength="19"
+                      placeholder="e.g. 1234 5678 9123 0000"
+                    />
+                    <div class="errors">
+                      <span v-if="noNumber && inputs.number == ''"
+                        >Can't be blank</span
+                      >
+                      <span v-if="isNaN(numberChecked) && inputs.number != ''"
+                        >Wrong format, numbers only</span
+                      >
+                    </div>
+                  </div>
+                  <div class="input__expireDate">
+                    <label for="expireDate">Exp. Date (MM/YY)</label>
+                    <div class="select__expireDate">
+                      <input
+                        v-model="inputs.month"
+                        :class="[classMonth, borderMonth]"
+                        type="text"
+                        name="month"
+                        id=""
+                        maxlength="2"
+                        placeholder="MM"
+                      />
+                      <input
+                        v-model="inputs.year"
+                        :class="[classYear, borderYear]"
+                        type="text"
+                        name="year"
+                        id=""
+                        maxlength="2"
+                        placeholder="YY"
+                      />
+                    </div>
+                    <div class="errors">
+                      <span
+                        v-if="(noMonth && inputs.month == '') || (noYear && inputs.year == '')"
+                        >Can't be blank</span
+                      >
+                      <span
+                        v-if="monthChecked > 12 || (isNaN(monthChecked) && inputs.month != '') || (isNaN(yearChecked) && inputs.year != '')"
+                        >Incorrect entry</span
+                      >
+                    </div>
+                  </div>
+                  <div class="input__cvc">
+                    <label for="cvc">CVC</label>
+                    <input
+                      v-model="inputs.cvc"
+                      :class="[classCvc, borderCvc]"
+                      type="text"
+                      name="cvc"
+                      minlength="3"
+                      maxlength="3"
+                      placeholder="e.g. 123"
+                    />
+                    <div class="errors">
+                      <span v-if="noCvc && inputs.cvc == ''"
+                        >Can't be blank</span
+                      >
+                      <span v-if="isNaN(cvcChecked) && inputs.cvc != ''"
+                        >Incorrect entry</span
+                      >
+                    </div>
+                  </div>
+                  <div class="input__confirm">
+                    <input type="submit" value="Confirm" />
+                  </div>
                 </div>
               </form>
             </div>

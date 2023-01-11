@@ -28,24 +28,23 @@ createApp({
             borderNumber: '',
             borderMonth: '',
             borderYear: '',
-            borderCvc: ''
+            borderCvc: '',
+            // Form
+            valid: false
         }
     },
     computed: {
+        // Adding spaces in the number entry view
         numberSpaces() {
-            let number = this.inputs.number;
-            if (number.length == 4) {
-                console.log('nombre * 4');
-                number += 'hello';
+            // A corriger !!!
+            if (this.inputs.number.length == 4) {
+                this.inputs.number += ' ';
+            } else if (this.inputs.number.length == 9) {
+                this.inputs.number += ' ';
+            } else if (this.inputs.number.length == 14) {
+                this.inputs.number += ' ';
             }
-            if (number.length == 9) {
-                number += ' ';
-            }
-            if (number.length == 14) {
-                number += ' ';
-            }
-            console.log(number);
-            return number;
+            return this.inputs.number;
         },
         // Checking input values
         nameChecked() {
@@ -98,7 +97,7 @@ createApp({
     methods: {
         validForm() {
             if (this.nameChecked && this.numberChecked && this.monthChecked && this.yearChecked && this.cvcChecked) {
-                console.log('formulaire valide1')
+                this.valid = true;
             } else {
                 if (this.nameChecked.length == 0) {
                     console.log('name:', this.nameChecked)
@@ -141,7 +140,9 @@ createApp({
                 this.noCvc = false;
                 this.borderCvc = '';
             }
-            console.log('formulaire valide2')
+        },
+        reload() {
+            location.reload();
         }
     }
 }).mount('#app')
