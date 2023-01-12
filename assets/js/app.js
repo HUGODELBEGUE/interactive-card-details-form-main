@@ -42,7 +42,7 @@ createApp({
             let number = this.inputs.number;
             let reg = /([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/;
             number = number.replace(reg, '$1 $2 $3 $4');
-            return number
+            return number;
         },
         // Checking input values
         nameChecked() {
@@ -70,7 +70,7 @@ createApp({
         classNumber() {
             return {
                 errorsColor: (isNaN(this.numberChecked) && this.inputs.number != '') || (this.inputs.number.length < 16 && this.inputs.number != ''),
-                normalColor: this.inputs.number.length > 0 && !isNaN(this.numberChecked)
+                normalColor: this.inputs.number.length == 16 && !isNaN(this.numberChecked)
             }
         },
         classMonth() {
@@ -91,6 +91,9 @@ createApp({
                 normalColor: this.inputs.cvc.length == 3 && !isNaN(this.cvcChecked)
             }
         },
+        test() {
+            console.log('numberChecked:', this.inputs.number.length)
+        }
     },
     methods: {
         validForm() {
@@ -101,7 +104,6 @@ createApp({
                 this.noName = true;
                 return false;
             } else if (this.inputs.number.length < 16 || isNaN(this.numberChecked)) {
-                console.log('this.inputs.number.length:', this.inputs.number.length)
                 console.log('number:', this.numberChecked)
                 this.borderNumber = 'errorsColor';
                 this.noNumber = true;

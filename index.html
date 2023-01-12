@@ -134,7 +134,8 @@
                       <span v-if="isNaN(numberChecked) && inputs.number != ''"
                         >Wrong format, numbers only</span
                       >
-                      <span v-if="noNumber && this.inputs.number.length < 16"
+                      <span
+                        v-if="inputs.number != '' && this.inputs.number.length < 16"
                         >Minimum 16 digits</span
                       >
                     </div>
@@ -189,7 +190,8 @@
                       <span v-if="isNaN(cvcChecked) && inputs.cvc != ''"
                         >Incorrect entry</span
                       >
-                      <span v-if="noCvc && this.inputs.cvc.length < 3"
+                      <span
+                        v-if="this.inputs.cvc.length < 3 && inputs.cvc != ''"
                         >Minimum 3 digits</span
                       >
                     </div>
@@ -202,6 +204,7 @@
             </div>
           </div>
         </div>
+        {{test}}
       </main>
     </div>
 
