@@ -33,18 +33,16 @@ createApp({
             valid: false
         }
     },
+    mounted() {
+        this.$refs.nam.focus()
+    },
     computed: {
         // Adding spaces in the number entry view
         numberSpaces() {
-            // A corriger !!!
-            if (this.inputs.number.length == 4) {
-                this.inputs.number += ' ';
-            } else if (this.inputs.number.length == 9) {
-                this.inputs.number += ' ';
-            } else if (this.inputs.number.length == 14) {
-                this.inputs.number += ' ';
-            }
-            return this.inputs.number;
+            let number = this.inputs.number;
+            let reg = /([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/;
+            number = number.replace(reg, '$1 $2 $3 $4');
+            return number
         },
         // Checking input values
         nameChecked() {
@@ -71,7 +69,7 @@ createApp({
         },
         classNumber() {
             return {
-                errorsColor: isNaN(this.numberChecked) && this.inputs.number != '',
+                errorsColor: (isNaN(this.numberChecked) && this.inputs.number != '') || (this.inputs.number.length < 16 && this.inputs.number != ''),
                 normalColor: this.inputs.number.length > 0 && !isNaN(this.numberChecked)
             }
         },
@@ -89,56 +87,52 @@ createApp({
         },
         classCvc() {
             return {
-                errorsColor: isNaN(this.cvcChecked) && this.inputs.cvc != '',
+                errorsColor: (isNaN(this.cvcChecked) && this.inputs.cvc != '') || (this.inputs.cvc.length < 3 && this.inputs.cvc != ''),
                 normalColor: this.inputs.cvc.length == 3 && !isNaN(this.cvcChecked)
             }
         },
     },
     methods: {
         validForm() {
-            if (this.nameChecked && this.numberChecked && this.monthChecked && this.yearChecked && this.cvcChecked) {
-                this.valid = true;
+            this.valid = false;
+            if (this.nameChecked.length == 0) {
+                console.log('name:', this.nameChecked)
+                this.borderName = 'errorsColor';
+                this.noName = true;
+                return false;
+            } else if (this.inputs.number.length < 16 || isNaN(this.numberChecked)) {
+                console.log('this.inputs.number.length:', this.inputs.number.length)
+                console.log('number:', this.numberChecked)
+                this.borderNumber = 'errorsColor';
+                this.noNumber = true;
+                return false;
+            } else if (isNaN(this.monthChecked)) {
+                console.log('month:', this.monthChecked)
+                this.borderMonth = 'errorsColor';
+                this.noMonth = true;
+                return false;
+            } else if (isNaN(this.yearChecked)) {
+                console.log('year:', this.yearChecked)
+                this.borderYear = 'errorsColor';
+                this.noYear = true;
+                return false;
+            } else if (this.inputs.cvc.length < 3 || isNaN(this.cvcChecked)) {
+                console.log('cvc:', this.cvcChecked)
+                this.borderCvc = 'errorsColor';
+                this.noCvc = true;
+                return false;
             } else {
-                if (this.nameChecked.length == 0) {
-                    console.log('name:', this.nameChecked)
-                    this.borderName = 'errorsColor';
-                    this.noName = true;
-                    return false;
-                }
                 this.noName = false;
                 this.borderName = '';
-                if (isNaN(this.numberChecked)) {
-                    console.log('number:', this.numberChecked)
-                    this.borderNumber = 'errorsColor';
-                    this.noNumber = true;
-                    return false;
-                }
                 this.noNumber = false;
                 this.borderNumber = '';
-                if (isNaN(this.monthChecked)) {
-                    console.log('month:', this.monthChecked)
-                    this.borderMonth = 'errorsColor';
-                    this.noMonth = true;
-                    return false;
-                }
                 this.noMonth = false;
                 this.borderMonth = '';
-                if (isNaN(this.yearChecked)) {
-                    console.log('year:', this.yearChecked)
-                    this.borderYear = 'errorsColor';
-                    this.noYear = true;
-                    return false;
-                }
                 this.noYear = false;
                 this.borderYear = '';
-                if (isNaN(this.cvcChecked)) {
-                    console.log('cvc:', this.cvcChecked)
-                    this.borderCvc = 'errorsColor';
-                    this.noCvc = true;
-                    return false;
-                }
                 this.noCvc = false;
                 this.borderCvc = '';
+                this.valid = true;
             }
         },
         reload() {

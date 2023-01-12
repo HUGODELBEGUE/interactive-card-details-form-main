@@ -100,10 +100,12 @@
                   <div class="input__name">
                     <label for="name">Cardholder Name</label>
                     <input
+                      ref="nam"
                       v-model="inputs.name"
                       :class="[className, borderName]"
                       type="text"
                       name="name"
+                      maxlength="30"
                       placeholder="e.g. Jane Appleseed"
                     />
                     <div class="errors">
@@ -122,8 +124,7 @@
                       :class="[classNumber, borderNumber]"
                       type="text"
                       name="number"
-                      minlength="19"
-                      maxlength="19"
+                      maxlength="16"
                       placeholder="e.g. 1234 5678 9123 0000"
                     />
                     <div class="errors">
@@ -132,6 +133,9 @@
                       >
                       <span v-if="isNaN(numberChecked) && inputs.number != ''"
                         >Wrong format, numbers only</span
+                      >
+                      <span v-if="noNumber && this.inputs.number.length < 16"
+                        >Minimum 16 digits</span
                       >
                     </div>
                   </div>
@@ -175,7 +179,6 @@
                       :class="[classCvc, borderCvc]"
                       type="text"
                       name="cvc"
-                      minlength="3"
                       maxlength="3"
                       placeholder="e.g. 123"
                     />
@@ -185,6 +188,9 @@
                       >
                       <span v-if="isNaN(cvcChecked) && inputs.cvc != ''"
                         >Incorrect entry</span
+                      >
+                      <span v-if="noCvc && this.inputs.cvc.length < 3"
+                        >Minimum 3 digits</span
                       >
                     </div>
                   </div>
