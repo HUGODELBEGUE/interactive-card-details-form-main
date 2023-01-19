@@ -92,10 +92,19 @@ createApp({
             }
         },
         test() {
-            console.log('numberChecked:', this.inputs.number.length)
-        }
+            return true;
+        },
+        focusInputs() {
+            if (this.inputs.number.length == 16) {
+                this.$refs.mon.focus()
+                console.log('hello');
+            }
+        },
     },
     methods: {
+        test3() {
+            this.$refs.num.focus();
+        },
         validForm() {
             this.valid = false;
             if (this.nameChecked.length == 0) {

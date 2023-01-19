@@ -13,7 +13,7 @@
 * {
     box-sizing: border-box;
     font-family: $family;
-    outline: none;
+    outline: transparent;
 }
 
 body {
@@ -62,19 +62,19 @@ body {
     @media #{$desktopUpScreen} {
         display: grid;
         width: 100%;
-        height: 25vh;
+        height: 19.6rem;
         background-image: url(../images/bg-main-mobile.png);
         padding: 2.8em 20.5%;
     }
 
     @media #{$desktopDownScreen} {
-        height: 20vh;
+        height: 15.6rem;
         font-size: 14px;
         padding: 2.8em 12%;
     }
 
     @media #{$mobileUpScreen} {
-        height: 15.5vh;
+        height: 12rem;
         font-size: 11px;
         padding: 2.8em 5%;
     }
@@ -405,7 +405,7 @@ body {
             flex-direction: column;
             align-items: flex-start;
             margin-bottom: .4em;
-            height: 1em;
+            height: 2em;
             row-gap: .2em;
             color: $red__errors;
             font-size: .7em;

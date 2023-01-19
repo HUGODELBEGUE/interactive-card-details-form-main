@@ -33,7 +33,7 @@
       <main>
         <div class="container__main">
           <div class="container__creditcard">
-            <div class="creditcard__front creditcard__size">
+            <div @click="test3" class="creditcard__front creditcard__size">
               <div class="creditcard__logo">
                 <img
                   src="./assets/images/card-logo.svg"
@@ -120,6 +120,7 @@
                   <div class="input__number">
                     <label for="number">Card Number</label>
                     <input
+                      ref="num"
                       v-model="inputs.number"
                       :class="[classNumber, borderNumber]"
                       type="text"
@@ -144,6 +145,7 @@
                     <label for="expireDate">Exp. Date (MM/YY)</label>
                     <div class="select__expireDate">
                       <input
+                        ref="mon"
                         v-model="inputs.month"
                         :class="[classMonth, borderMonth]"
                         type="text"
@@ -153,6 +155,7 @@
                         placeholder="MM"
                       />
                       <input
+                        ref="yea"
                         v-model="inputs.year"
                         :class="[classYear, borderYear]"
                         type="text"
@@ -176,6 +179,7 @@
                   <div class="input__cvc">
                     <label for="cvc">CVC</label>
                     <input
+                      ref="cvc"
                       v-model="inputs.cvc"
                       :class="[classCvc, borderCvc]"
                       type="text"
@@ -204,7 +208,7 @@
             </div>
           </div>
         </div>
-        {{test}}
+        {{test}} {{focusInputs}}
       </main>
     </div>
 
