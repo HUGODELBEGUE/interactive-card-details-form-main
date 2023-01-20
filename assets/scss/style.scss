@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
+@import './_reset';
+@import './_variables';
+@import './_mixins';
+@import './_responsive';
+
+:root {
+    // Fonts
+    font-family: $family;
+    font-size: $font__size;
+    font-weight: $weights;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: $family;
+    outline: transparent;
+}
+
+body {
+    min-height: 100vh;
+    max-width: $desktop;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media #{$desktopUpScreen} {
+        justify-content: flex-start;
+    }
+
+    @media #{$mobileUpScreen} {
+        min-width: $mobile;
+    }
+}
+
+#app {
+    max-width: $desktop;
+    filter: drop-shadow(0 0 3px $light_grayish_violet);
+}
+
+.container__main {
+    min-height: $height;
+    display: flex;
+    justify-content: center;
+
+    @media #{$desktopUpScreen} {
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: initial;
+    }
+}
+
+.container__creditcard {
+    position: relative;
+    height: auto;
+    width: 35%;
+    background-image: url(../images/bg-main-desktop.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $white;
+
+    @media #{$desktopUpScreen} {
+        display: grid;
+        width: 100%;
+        height: 19.67rem;
+        background-image: url(../images/bg-main-mobile.png);
+        padding: 2.8em 20.5%;
+    }
+
+    @media #{$desktopDownScreen} {
+        height: 15.7rem;
+        font-size: 14px;
+        padding: 2.8em 12%;
+    }
+
+    @media #{$mobileUpScreen} {
+        height: 13rem;
+        font-size: 11px;
+        padding: 2.8em 5%;
+    }
+
+    .creditcard__size {
+        width: $width__card;
+        height: auto;
+        aspect-ratio: calc(447 / 245) / 1;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 5px;
+
+        @media #{$desktopDownScreen} {
+            width: calc(#{$width__card} * 0.8)
+        }
+
+        @media #{$mobileUpScreen} {
+            width: calc(#{$width__card} * 0.635)
+        }
+    }
+}
+
+.creditcard__front {
+    background-image: url(../images/bg-card-front.png);
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: absolute;
+    top: 21%;
+    left: 34%;
+    z-index: 2;
+
+    @media #{$desktopUpScreen} {
+        top: 49%;
+        left: initial;
+        justify-self: flex-start;
+        margin-left: 20.5%;
+    }
+
+    @media #{$desktopDownScreen} {
+        top: 49%;
+        margin-left: 12%;
+    }
+
+    @media #{$mobileUpScreen} {
+        top: 50%;
+        margin-left: 5%;
+    }
+
+    @media #{$mobileDownScreen} {
+        width: 100%;
+        height: 183px;
+        background-size: contain;
+    }
+
+    .creditcard__logo {
+        img {
+            @media #{$desktopDownScreen} {
+                width: 25%;
+            }
+        }
+    }
+
+    .creditcard__infos {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.5em;
+    }
+
+    .creditcard__num {
+        font-size: 1.5em;
+        letter-spacing: .16em;
+    }
+
+    .creditcard__name__date {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: .7em;
+        letter-spacing: .1em;
+
+        @media #{$desktopDownScreen} {
+            font-size: .9em;
+        }
+    }
+
+    .creditcard__name {
+        text-transform: uppercase;
+    }
+}
+
+.creditcard__back {
+    filter: drop-shadow(30px 0px 260px gray);
+    background-image: url(../images/bg-card-back.png);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 21%;
+    left: 52%;
+    z-index: 1;
+
+    @media #{$desktopUpScreen} {
+        left: initial;
+        justify-self: flex-end;
+        margin-right: 20.5%;
+    }
+
+    @media #{$desktopDownScreen} {
+        margin-right: 12%;
+    }
+
+    @media #{$mobileUpScreen} {
+        margin-right: 5%;
+    }
+
+    @media #{$mobileDownScreen} {
+        width: 100%;
+        height: 183px;
+        background-size: contain;
+    }
+
+    .creditcard__secretnum {
+        margin-right: 3rem;
+        font-size: .7em;
+        letter-spacing: .1em;
+
+        @media #{$desktopDownScreen} {
+            font-size: .9em;
+            margin-right: 2.5rem;
+        }
+
+        @media #{$mobileUpScreen} {
+            margin-right: 2rem;
+        }
+    }
+}
+
+.container__form {
+    position: relative;
+    height: auto;
+    width: 65%;
+    background: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media #{$desktopUpScreen} {
+        width: 100%;
+        padding: 7em 1.5em 3em;
+        font-size: 19px;
+    }
+
+    @media #{$desktopDownScreen} {
+        font-size: 20px;
+        padding: 5.8em 1.5em 2.5em;
+    }
+
+    @media #{$mobileUpScreen} {
+        padding: 4.5em 1.5em 2.5em;
+    }
+
+    // Part form
+    .form {
+        width: 40%;
+        position: absolute;
+        left: 35%;
+
+        @media #{$desktopUpScreen} {
+            width: 60%;
+            position: static;
+        }
+
+        @media #{$desktopDownScreen} {
+            width: 80%;
+        }
+
+        @media #{$mobileUpScreen} {
+            width: 100%;
+        }
+    }
+
+    .wrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    form {
+        label {
+            font-size: .7em;
+            text-transform: uppercase;
+            color: $very_dark_violet;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+        }
+
+        input {
+            @include normal_border;
+            padding: .6em;
+            border-radius: 8px;
+            color: $very_dark_violet;
+            font-size: .9em;
+            cursor: pointer;
+
+            &:hover,
+            &:active,
+            &:focus,
+            &:focus-visible {
+                // A corriger !!!!!
+                @include active_border;
+            }
+        }
+
+        // Part complete
+        .complete {
+            text-align: center;
+            grid-row-gap: 1.3em;
+        }
+
+        .complete__logo {
+            grid-column: 1 / 3;
+            grid-row: 1;
+            margin-bottom: .5em;
+        }
+
+        .complete__thank {
+            grid-column: 1 / 3;
+            grid-row: 2;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .complete__text {
+            grid-column: 1 / 3;
+            grid-row: 3;
+            color: $dark_grayish_violet;
+        }
+
+        .complete__continue {
+            margin-top: 1.3em !important;
+        }
+
+        // Part inputs
+        input[type="text"],
+        input[type="number"] {
+            margin-top: .4em;
+            margin-bottom: .4em;
+        }
+
+        input[type="text"],
+        input[type="submit"],
+        input[type="button"] {
+            width: 100%;
+        }
+
+        .input__name {
+            grid-column: 1 / 3;
+            grid-row: 1;
+        }
+
+        .input__number {
+            grid-column: 1 / 3;
+            grid-row: 2;
+        }
+
+        .input__expireDate {
+            grid-column: 1 / 2;
+            grid-row: 3;
+
+            input {
+                width: 50%;
+            }
+
+            .select__expireDate {
+                display: flex;
+                column-gap: .5em;
+                margin-right: .5em;
+            }
+        }
+
+        .input__cvc {
+            grid-column: 2 / 3;
+            grid-row: 3;
+            margin-left: .5em;
+        }
+
+        .input__confirm {
+            grid-column: 1 / 3;
+            grid-row: 4;
+            margin-top: .8em;
+            text-align: center;
+
+            input {
+                background: $very_dark_violet;
+                color: $light_grayish_violet;
+                border-color: $very_dark_violet;
+                padding: .7em;
+
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-visible {
+                    border-image: none;
+                    box-shadow: 0 0 2px 3px hsl(249, 99%, 64%);
+                }
+
+                @media #{$desktopUpScreen} {
+                    width: 50%;
+                }
+
+                @media #{$desktopDownScreen} {
+                    width: 75%;
+                }
+
+                @media #{$mobileUpScreen} {
+                    width: 100%;
+                }
+            }
+        }
+
+        .errors {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: .4em;
+            height: 2em;
+            row-gap: .2em;
+            color: $red__errors;
+            font-size: .7em;
+        }
+
+        .errorsColor {
+            @include error_border;
+
+            &:focus,
+            &:focus-visible {
+                @include error_border;
+            }
+        }
+
+        .normalColor {
+            @include normal_border;
+
+            &:hover,
+            &:active,
+            &:focus,
+            &:focus-visible {
+                // A corriger !!!!!
+                @include active_border;
+            }
+        }
+    }
+}
