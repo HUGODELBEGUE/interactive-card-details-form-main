@@ -33,7 +33,7 @@
       <main>
         <div class="container__main">
           <div class="container__creditcard">
-            <div @click="test3" class="creditcard__front creditcard__size">
+            <div class="creditcard__front creditcard__size">
               <div class="creditcard__logo">
                 <img
                   src="./assets/images/card-logo.svg"
@@ -101,6 +101,7 @@
                     <label for="name">Cardholder Name</label>
                     <input
                       ref="nam"
+                      @keydown.up.right.down.left="focusInputs('nam')"
                       v-model="inputs.name"
                       :class="[className, borderName]"
                       type="text"
@@ -121,6 +122,7 @@
                     <label for="number">Card Number</label>
                     <input
                       ref="num"
+                      @keydown.up.right.down.left="focusInputs('num')"
                       v-model="inputs.number"
                       :class="[classNumber, borderNumber]"
                       type="text"
@@ -146,6 +148,7 @@
                     <div class="select__expireDate">
                       <input
                         ref="mon"
+                        @keydown.up.right.down.left="focusInputs('mon')"
                         v-model="inputs.month"
                         :class="[classMonth, borderMonth]"
                         type="text"
@@ -156,6 +159,7 @@
                       />
                       <input
                         ref="yea"
+                        @keydown.up.right.down.left="focusInputs('yea')"
                         v-model="inputs.year"
                         :class="[classYear, borderYear]"
                         type="text"
@@ -180,6 +184,7 @@
                     <label for="cvc">CVC</label>
                     <input
                       ref="cvc"
+                      @keydown.up.right.down.left="focusInputs('cvc')"
                       v-model="inputs.cvc"
                       :class="[classCvc, borderCvc]"
                       type="text"
@@ -201,14 +206,13 @@
                     </div>
                   </div>
                   <div class="input__confirm">
-                    <input type="submit" value="Confirm" />
+                    <input ref="con" type="submit" value="Confirm" />
                   </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
-        {{test}} {{focusInputs}}
       </main>
     </div>
 

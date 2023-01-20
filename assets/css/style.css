@@ -155,16 +155,15 @@ body {
     justify-content: flex-start;
   }
 }
+@media only screen and (max-width: 620px) {
+  body {
+    min-width: 375px;
+  }
+}
 
 #app {
   max-width: 1440px;
-  height: 900px;
   filter: drop-shadow(0 0 3px hsl(270deg, 3%, 87%));
-}
-@media only screen and (max-width: 375px) {
-  #app {
-    min-width: 375px;
-  }
 }
 
 .container__main {
@@ -176,6 +175,7 @@ body {
   .container__main {
     flex-direction: column;
     justify-content: flex-start;
+    min-height: initial;
   }
 }
 
@@ -192,21 +192,21 @@ body {
   .container__creditcard {
     display: grid;
     width: 100%;
-    height: 19.6rem;
+    height: 19.67rem;
     background-image: url(../images/bg-main-mobile.png);
     padding: 2.8em 20.5%;
   }
 }
 @media only screen and (max-width: 920px) {
   .container__creditcard {
-    height: 15.6rem;
+    height: 15.7rem;
     font-size: 14px;
     padding: 2.8em 12%;
   }
 }
 @media only screen and (max-width: 620px) {
   .container__creditcard {
-    height: 12rem;
+    height: 13rem;
     font-size: 11px;
     padding: 2.8em 5%;
   }
@@ -227,7 +227,7 @@ body {
 }
 @media only screen and (max-width: 620px) {
   .container__creditcard .creditcard__size {
-    width: calc(447px * 0.6);
+    width: calc(447px * 0.635);
   }
 }
 
@@ -375,13 +375,7 @@ body {
 }
 @media only screen and (max-width: 620px) {
   .container__form {
-    font-size: 21px;
     padding: 4.5em 1.5em 2.5em;
-  }
-}
-@media only screen and (max-width: 375px) {
-  .container__form {
-    font-size: 22px;
   }
 }
 .container__form .form {
@@ -417,23 +411,16 @@ body {
   font-weight: bold;
   letter-spacing: 0.1em;
 }
-@media only screen and (max-width: 375px) {
-  .container__form form label {
-    font-size: 0.6em;
-  }
-}
 .container__form form input {
+  border: 2px solid hsl(270deg, 3%, 87%);
   padding: 0.6em;
   border-radius: 8px;
-  border: 2px solid hsl(270deg, 3%, 87%);
   color: hsl(278deg, 68%, 11%);
   font-size: 0.9em;
   cursor: pointer;
 }
-.container__form form input:focus, .container__form form input:focus-visible {
-  border-width: 2px;
-  border-style: solid;
-  border-image: linear-gradient(hsl(249deg, 99%, 64%), hsl(278deg, 94%, 30%)) 1;
+.container__form form input:hover, .container__form form input:active, .container__form form input:focus, .container__form form input:focus-visible {
+  border: 2px solid hsl(278deg, 94%, 30%);
 }
 .container__form form .complete {
   text-align: center;
@@ -506,6 +493,10 @@ body {
   border-color: hsl(278deg, 68%, 11%);
   padding: 0.7em;
 }
+.container__form form .input__confirm input:hover, .container__form form .input__confirm input:active, .container__form form .input__confirm input:focus, .container__form form .input__confirm input:focus-visible {
+  border-image: none;
+  box-shadow: 0 0 2px 3px hsl(249deg, 99%, 64%);
+}
 @media only screen and (max-width: 1440px) {
   .container__form form .input__confirm input {
     width: 50%;
@@ -540,10 +531,8 @@ body {
 .container__form form .normalColor {
   border: 2px solid hsl(270deg, 3%, 87%);
 }
-.container__form form .normalColor:focus, .container__form form .normalColor:focus-visible {
-  border-width: 2px;
-  border-style: solid;
-  border-image: linear-gradient(hsl(249deg, 99%, 64%), hsl(278deg, 94%, 30%)) 1;
+.container__form form .normalColor:hover, .container__form form .normalColor:active, .container__form form .normalColor:focus, .container__form form .normalColor:focus-visible {
+  border: 2px solid hsl(278deg, 94%, 30%);
 }
 
 /*# sourceMappingURL=style.css.map */

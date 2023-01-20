@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
 @import './_reset';
 @import './_variables';
+@import './_mixins';
 @import './_responsive';
 
 :root {
@@ -27,16 +28,15 @@ body {
     @media #{$desktopUpScreen} {
         justify-content: flex-start;
     }
+
+    @media #{$mobileUpScreen} {
+        min-width: $mobile;
+    }
 }
 
 #app {
     max-width: $desktop;
-    height: $height;
     filter: drop-shadow(0 0 3px $light_grayish_violet);
-
-    @media #{$mobileDownScreen} {
-        min-width: $mobile;
-    }
 }
 
 .container__main {
@@ -47,6 +47,7 @@ body {
     @media #{$desktopUpScreen} {
         flex-direction: column;
         justify-content: flex-start;
+        min-height: initial;
     }
 }
 
@@ -62,19 +63,19 @@ body {
     @media #{$desktopUpScreen} {
         display: grid;
         width: 100%;
-        height: 19.6rem;
+        height: 19.67rem;
         background-image: url(../images/bg-main-mobile.png);
         padding: 2.8em 20.5%;
     }
 
     @media #{$desktopDownScreen} {
-        height: 15.6rem;
+        height: 15.7rem;
         font-size: 14px;
         padding: 2.8em 12%;
     }
 
     @media #{$mobileUpScreen} {
-        height: 12rem;
+        height: 13rem;
         font-size: 11px;
         padding: 2.8em 5%;
     }
@@ -93,7 +94,7 @@ body {
         }
 
         @media #{$mobileUpScreen} {
-            width: calc(#{$width__card} * 0.6)
+            width: calc(#{$width__card} * 0.635)
         }
     }
 }
@@ -236,12 +237,7 @@ body {
     }
 
     @media #{$mobileUpScreen} {
-        font-size: 21px;
         padding: 4.5em 1.5em 2.5em;
-    }
-
-    @media #{$mobileDownScreen} {
-        font-size: 22px;
     }
 
     // Part form
@@ -277,26 +273,22 @@ body {
             color: $very_dark_violet;
             font-weight: bold;
             letter-spacing: 0.1em;
-
-            @media #{$mobileDownScreen} {
-                font-size: .6em;
-            }
         }
 
         input {
+            @include normal_border;
             padding: .6em;
             border-radius: 8px;
-            border: 2px solid $light_grayish_violet;
             color: $very_dark_violet;
             font-size: .9em;
             cursor: pointer;
 
+            &:hover,
+            &:active,
             &:focus,
             &:focus-visible {
                 // A corriger !!!!!
-                border-width: 2px;
-                border-style: solid;
-                border-image: $linear_gradient__active 1;
+                @include active_border;
             }
         }
 
@@ -386,6 +378,14 @@ body {
                 border-color: $very_dark_violet;
                 padding: .7em;
 
+                &:hover,
+                &:active,
+                &:focus,
+                &:focus-visible {
+                    border-image: none;
+                    box-shadow: 0 0 2px 3px hsl(249, 99%, 64%);
+                }
+
                 @media #{$desktopUpScreen} {
                     width: 50%;
                 }
@@ -412,23 +412,23 @@ body {
         }
 
         .errorsColor {
-            border: 2px solid $red__errors;
+            @include error_border;
 
             &:focus,
             &:focus-visible {
-                border: 2px solid $red__errors;
+                @include error_border;
             }
         }
 
         .normalColor {
-            border: 2px solid $light_grayish_violet;
+            @include normal_border;
 
+            &:hover,
+            &:active,
             &:focus,
             &:focus-visible {
                 // A corriger !!!!!
-                border-width: 2px;
-                border-style: solid;
-                border-image: $linear_gradient__active 1;
+                @include active_border;
             }
         }
     }

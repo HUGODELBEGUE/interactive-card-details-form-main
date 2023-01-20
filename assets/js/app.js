@@ -42,7 +42,8 @@ createApp({
             let number = this.inputs.number;
             let reg = /([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/;
             number = number.replace(reg, '$1 $2 $3 $4');
-            return number;
+            this.inputs.number = number;
+            return this.inputs.number;
         },
         // Checking input values
         nameChecked() {
@@ -91,19 +92,24 @@ createApp({
                 normalColor: this.inputs.cvc.length == 3 && !isNaN(this.cvcChecked)
             }
         },
-        test() {
-            return true;
-        },
-        focusInputs() {
-            if (this.inputs.number.length == 16) {
-                this.$refs.mon.focus()
-                console.log('hello');
-            }
-        },
     },
     methods: {
-        test3() {
-            this.$refs.num.focus();
+        // Changes the focus of the inputs
+        focusInputs(input) {
+            if (input == 'nam') {
+                this.$refs.num.focus();
+            } else if (input == 'num') {
+                this.$refs.mon.focus();
+            }
+            else if (input == 'mon') {
+                this.$refs.yea.focus();
+            }
+            else if (input == 'yea') {
+                this.$refs.cvc.focus();
+            }
+            else {
+                this.$refs.con.focus();
+            }
         },
         validForm() {
             this.valid = false;
@@ -145,6 +151,7 @@ createApp({
                 this.borderCvc = '';
                 this.valid = true;
             }
+
         },
         reload() {
             location.reload();
