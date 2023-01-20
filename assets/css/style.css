@@ -150,7 +150,7 @@ body {
   flex-direction: column;
   justify-content: center;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   body {
     justify-content: flex-start;
   }
@@ -171,7 +171,7 @@ body {
   display: flex;
   justify-content: center;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .container__main {
     flex-direction: column;
     justify-content: flex-start;
@@ -188,7 +188,7 @@ body {
   background-size: cover;
   color: hsl(0deg, 0%, 100%);
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .container__creditcard {
     display: grid;
     width: 100%;
@@ -242,7 +242,7 @@ body {
   left: 34%;
   z-index: 2;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .creditcard__front {
     top: 49%;
     left: initial;
@@ -310,7 +310,7 @@ body {
   left: 52%;
   z-index: 1;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .creditcard__back {
     left: initial;
     justify-self: flex-end;
@@ -360,7 +360,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .container__form {
     width: 100%;
     padding: 7em 1.5em 3em;
@@ -383,7 +383,7 @@ body {
   position: absolute;
   left: 35%;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .container__form .form {
     width: 60%;
     position: static;
@@ -497,7 +497,7 @@ body {
   border-image: none;
   box-shadow: 0 0 2px 3px hsl(249deg, 99%, 64%);
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1300px) {
   .container__form form .input__confirm input {
     width: 50%;
   }
