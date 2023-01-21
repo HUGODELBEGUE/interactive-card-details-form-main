@@ -123,7 +123,7 @@ createApp({
                 this.borderNumber = 'errorsColor';
                 this.noNumber = true;
                 return false;
-            } else if (isNaN(this.monthChecked)) {
+            } else if (isNaN(this.monthChecked) || this.monthChecked > 12) {
                 console.log('month:', this.monthChecked)
                 this.borderMonth = 'errorsColor';
                 this.noMonth = true;
