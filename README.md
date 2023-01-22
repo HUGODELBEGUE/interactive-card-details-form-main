@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://github.com/HUGODELBEGUE/interactive-card-details-form-main](https://github.com/hugodelbegue/interactive-card-details-form-main)
+- Solution URL: [https://github.com/hugodelbegue/interactive-card-details-form-main](https://github.com/hugodelbegue/interactive-card-details-form-main)
 - Live Site URL: [https://hugodelbegue.github.io/interactive-card-details-form-main](https://hugodelbegue.github.io/interactive-card-details-form-main)
 
 ## My process
