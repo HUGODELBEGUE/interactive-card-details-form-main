@@ -42,20 +42,19 @@
               </div>
               <div class="creditcard__infos">
                 <div v-if="inputs.number == ''" class="creditcard__num">
-                  {{ inputs__default.default__num }}
+                  {{ default_values.num }}
                 </div>
                 <div v-else class="creditcard__num">{{ numberSpaces }}</div>
                 <div class="creditcard__name__date">
                   <div v-if="inputs.name == ''" class="creditcard__name">
-                    {{ inputs__default.default__name }}
+                    {{ default_values.name }}
                   </div>
                   <div v-else class="creditcard__name">{{ inputs.name }}</div>
                   <div
                     v-if="inputs.month == '' && inputs.year == ''"
                     class="creditcard__date"
                   >
-                    {{ inputs__default.default__month }}/{{
-                    inputs__default.default__year }}
+                    {{ default_values.month }}/{{ default_values.year }}
                   </div>
                   <div v-else class="creditcard__date">
                     {{ inputs.month }}/{{ inputs.year }}
@@ -65,7 +64,7 @@
             </div>
             <div class="creditcard__back creditcard__size">
               <div v-if="inputs.cvc == ''" class="creditcard__secretnum">
-                {{ inputs__default.default__cvc }}
+                {{ default_values.cvc }}
               </div>
               <div v-else class="creditcard__secretnum">{{ inputs.cvc }}</div>
             </div>
@@ -127,7 +126,7 @@
                       :class="[classNumber, borderNumber]"
                       type="text"
                       name="number"
-                      maxlength="16"
+                      maxlength="19"
                       placeholder="e.g. 1234 5678 9123 0000"
                     />
                     <div class="errors">
@@ -138,7 +137,7 @@
                         >Wrong format, numbers only</span
                       >
                       <span
-                        v-if="inputs.number != '' && this.inputs.number.length < 16"
+                        v-if="inputs.number != '' && this.inputs.number.length < 19"
                         >Minimum 16 digits</span
                       >
                     </div>

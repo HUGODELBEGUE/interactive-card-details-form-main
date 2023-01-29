@@ -2,15 +2,17 @@ import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
 createApp({
     data() {
+        // Default values
+        const DEFAULT_VALUES = {
+            num: '0000 0000 0000 0000',
+            name: 'Jane Appleseed',
+            month: '00',
+            year: '00',
+            cvc: '000'
+        };
         return {
+            default_values: DEFAULT_VALUES,
             // Inputs
-            inputs__default: {
-                default__num: '0000 0000 0000 0000',
-                default__name: 'Jane Appleseed',
-                default__month: '00',
-                default__year: '00',
-                default__cvc: '000'
-            },
             inputs: {
                 name: '',
                 number: '',
@@ -39,11 +41,10 @@ createApp({
     computed: {
         // Adding spaces in the number entry view
         numberSpaces() {
-            let number = this.inputs.number;
-            let reg = /([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/;
-            number = number.replace(reg, '$1 $2 $3 $4');
-            this.inputs.number = number;
-            return this.inputs.number;
+            const number = this.inputs.number;
+            const formattedNumber = number.replace(/\d{4}(?=\d)/g, "$& ");
+            this.inputs.number = formattedNumber;
+            return formattedNumber;
         },
         // Checking input values
         nameChecked() {
@@ -71,7 +72,7 @@ createApp({
         classNumber() {
             return {
                 errorsColor: (isNaN(this.numberChecked) && this.inputs.number != '') || (this.inputs.number.length < 16 && this.inputs.number != ''),
-                normalColor: this.inputs.number.length == 16 && !isNaN(this.numberChecked)
+                normalColor: this.inputs.number.length == 19 && !isNaN(this.numberChecked)
             }
         },
         classMonth() {
@@ -113,45 +114,35 @@ createApp({
         },
         validForm() {
             this.valid = false;
+            this.noName = false;
+            this.borderName = '';
+            this.noNumber = false;
+            this.borderNumber = '';
+            this.noMonth = false;
+            this.borderMonth = '';
+            this.noYear = false;
+            this.borderYear = '';
+            this.noCvc = false;
+            this.borderCvc = '';
+
             if (this.nameChecked.length == 0) {
-                console.log('name:', this.nameChecked)
-                this.borderName = 'errorsColor';
                 this.noName = true;
-                return false;
+                this.borderName = 'errorsColor';
             } else if (this.inputs.number.length < 16 || isNaN(this.numberChecked)) {
-                console.log('number:', this.numberChecked)
-                this.borderNumber = 'errorsColor';
                 this.noNumber = true;
-                return false;
+                this.borderNumber = 'errorsColor';
             } else if (isNaN(this.monthChecked) || this.monthChecked > 12) {
-                console.log('month:', this.monthChecked)
-                this.borderMonth = 'errorsColor';
                 this.noMonth = true;
-                return false;
+                this.borderMonth = 'errorsColor';
             } else if (isNaN(this.yearChecked)) {
-                console.log('year:', this.yearChecked)
-                this.borderYear = 'errorsColor';
                 this.noYear = true;
-                return false;
+                this.borderYear = 'errorsColor';
             } else if (this.inputs.cvc.length < 3 || isNaN(this.cvcChecked)) {
-                console.log('cvc:', this.cvcChecked)
-                this.borderCvc = 'errorsColor';
                 this.noCvc = true;
-                return false;
+                this.borderCvc = 'errorsColor';
             } else {
-                this.noName = false;
-                this.borderName = '';
-                this.noNumber = false;
-                this.borderNumber = '';
-                this.noMonth = false;
-                this.borderMonth = '';
-                this.noYear = false;
-                this.borderYear = '';
-                this.noCvc = false;
-                this.borderCvc = '';
                 this.valid = true;
             }
-
         },
         reload() {
             location.reload();
