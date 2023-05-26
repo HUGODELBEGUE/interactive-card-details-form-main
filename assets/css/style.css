@@ -163,7 +163,7 @@ body {
 
 #app {
   max-width: 1440px;
-  filter: drop-shadow(0 0 3px hsl(270deg, 3%, 87%));
+  filter: drop-shadow(0 0 3px hsl(270, 3%, 87%));
 }
 
 .container__main {
@@ -186,7 +186,7 @@ body {
   background-image: url(../images/bg-main-desktop.png);
   background-repeat: no-repeat;
   background-size: cover;
-  color: hsl(0deg, 0%, 100%);
+  color: hsl(0, 0%, 100%);
 }
 @media only screen and (max-width: 1300px) {
   .container__creditcard {
@@ -355,7 +355,7 @@ body {
   position: relative;
   height: auto;
   width: 65%;
-  background: hsl(0deg, 0%, 100%);
+  background: hsl(0, 0%, 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -407,20 +407,20 @@ body {
 .container__form form label {
   font-size: 0.7em;
   text-transform: uppercase;
-  color: hsl(278deg, 68%, 11%);
+  color: hsl(278, 68%, 11%);
   font-weight: bold;
   letter-spacing: 0.1em;
 }
 .container__form form input {
-  border: 2px solid hsl(270deg, 3%, 87%);
+  border: 2px solid hsl(270, 3%, 87%);
   padding: 0.6em;
   border-radius: 8px;
-  color: hsl(278deg, 68%, 11%);
+  color: hsl(278, 68%, 11%);
   font-size: 0.9em;
   cursor: pointer;
 }
 .container__form form input:hover, .container__form form input:active, .container__form form input:focus, .container__form form input:focus-visible {
-  border: 2px solid hsl(278deg, 94%, 30%);
+  border: 2px solid hsl(278, 94%, 30%);
 }
 .container__form form .complete {
   text-align: center;
@@ -441,7 +441,7 @@ body {
 .container__form form .complete__text {
   grid-column: 1/3;
   grid-row: 3;
-  color: hsl(279deg, 6%, 55%);
+  color: hsl(279, 6%, 55%);
 }
 .container__form form .complete__continue {
   margin-top: 1.3em !important;
@@ -488,14 +488,14 @@ body {
   text-align: center;
 }
 .container__form form .input__confirm input {
-  background: hsl(278deg, 68%, 11%);
-  color: hsl(270deg, 3%, 87%);
-  border-color: hsl(278deg, 68%, 11%);
+  background: hsl(278, 68%, 11%);
+  color: hsl(270, 3%, 87%);
+  border-color: hsl(278, 68%, 11%);
   padding: 0.7em;
 }
 .container__form form .input__confirm input:hover, .container__form form .input__confirm input:active, .container__form form .input__confirm input:focus, .container__form form .input__confirm input:focus-visible {
   border-image: none;
-  box-shadow: 0 0 2px 3px hsl(249deg, 99%, 64%);
+  box-shadow: 0 0 2px 3px hsl(249, 99%, 64%);
 }
 @media only screen and (max-width: 1300px) {
   .container__form form .input__confirm input {
@@ -519,20 +519,20 @@ body {
   margin-bottom: 0.4em;
   height: 2em;
   row-gap: 0.2em;
-  color: hsl(0deg, 100%, 66%);
+  color: hsl(0, 100%, 66%);
   font-size: 0.7em;
 }
 .container__form form .errorsColor {
-  border: 2px solid hsl(0deg, 100%, 66%);
+  border: 2px solid hsl(0, 100%, 66%);
 }
 .container__form form .errorsColor:focus, .container__form form .errorsColor:focus-visible {
-  border: 2px solid hsl(0deg, 100%, 66%);
+  border: 2px solid hsl(0, 100%, 66%);
 }
 .container__form form .normalColor {
-  border: 2px solid hsl(270deg, 3%, 87%);
+  border: 2px solid hsl(270, 3%, 87%);
 }
 .container__form form .normalColor:hover, .container__form form .normalColor:active, .container__form form .normalColor:focus, .container__form form .normalColor:focus-visible {
-  border: 2px solid hsl(278deg, 94%, 30%);
+  border: 2px solid hsl(278, 94%, 30%);
 }
 
 /*# sourceMappingURL=style.css.map */
